@@ -17,3 +17,14 @@ class FeederResponse(BaseModel):
     feeder_id: str
     client_id: int
     created_at: datetime
+
+
+class VisitResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    feeder_id: int
+    species: str
+    confidence: float
+    image_path: str | None
+    detected_at: datetime
