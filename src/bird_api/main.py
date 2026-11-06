@@ -7,6 +7,7 @@ from sqlalchemy import text
 
 from bird_api.core.database import engine
 from bird_api.routes.client import router as client_router
+from bird_api.routes.feeder import router as feeder_router
 from bird_api.routes.prediction import router
 from bird_api.services.ml_service import BirdClassifier
 
@@ -25,6 +26,7 @@ bird_app = FastAPI(
 
 bird_app.include_router(router, prefix="/api/v1", tags=["prediction"])
 bird_app.include_router(client_router, prefix="/api/v1", tags=["clients"])
+bird_app.include_router(feeder_router, prefix="/api/v1", tags=["feeders"])
 
 
 @bird_app.get("/health")
