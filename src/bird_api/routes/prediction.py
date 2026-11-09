@@ -85,9 +85,10 @@ async def predict_and_store(
     feeder_id: str,
     request: Request,
     file: UploadFile,
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db),  # noqa: B008
 ):
     feeder = db.scalar(select(Feeder).where(Feeder.feeder_id == feeder_id))
+    
     if feeder is None:
         raise HTTPException(status_code=404, detail="Feeder not found")
 

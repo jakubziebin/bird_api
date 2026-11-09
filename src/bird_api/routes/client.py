@@ -19,7 +19,7 @@ router = APIRouter()
 def create_client(
     payload: ClientCreate,
     db: Session = Depends(get_db),  # noqa: B008
-):
+) -> ClientResponse:
     client = Client(email=payload.email)
     db.add(client)
 

@@ -2,8 +2,8 @@ services:
   api:
     build: .
     environment:
-      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/birds
-      HF_HUB_DISABLE_SSL_VERIFICATION: "1"
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      HF_HUB_DISABLE_SSL_VERIFICATION: ${HF_HUB_DISABLE_SSL_VERIFICATION:-0}
     container_name: bird_api
     ports:
       - "8000:8000"
@@ -15,9 +15,9 @@ services:
     image: postgres:17
     container_name: bird_db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: birds
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
